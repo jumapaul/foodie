@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/app/modules/home/views/widgets/meal_widget.dart';
 import 'package:foodie/app/modules/home/views/widgets/search_bar_widget.dart';
@@ -29,17 +28,22 @@ class SearchView extends GetView<SearchController> {
               enable: true,
               onSearch: (value) {
                 searchViewController.getSearchResults(value);
-                },
+              },
             ),
-
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               flex: 8,
               child: LayoutBuilder(builder: (context, constraints) {
                 return Obx(() {
-                  if (searchViewController.searchResults.value?.meals!.isNotEmpty == true) {
+                  if (searchViewController
+                          .searchResults.value?.meals!.isNotEmpty ==
+                      true) {
                     return GridView.builder(
-                      itemCount: searchViewController.searchResults.value?.meals?.length??0,
+                      itemCount: searchViewController
+                              .searchResults.value?.meals?.length ??
+                          0,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -51,11 +55,12 @@ class SearchView extends GetView<SearchController> {
                             .searchResults.value?.meals?[index];
 
                         return MealWidget(
+                            mealId: searchResults?.idMeal ?? "",
                             mealName: searchResults?.strMeal ?? "",
                             mealImage: searchResults?.strMealThumb ?? "");
                       },
                     );
-                  }else{
+                  } else {
                     return const Center(
                       child: Text("No results found"),
                     );

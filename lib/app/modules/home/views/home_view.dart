@@ -57,17 +57,18 @@ class HomeView extends GetView<HomeController> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount:
-                            homeController.categories.value?.categories?.length ??
-                                0,
+                        homeController.categories.value?.categories?.length ??
+                            0,
                         itemBuilder: (BuildContext context, int index) {
                           var category =
-                              homeController.categories.value?.categories?[index];
+                          homeController.categories.value?.categories?[index];
 
                           return CategoriesWidget(
                             categoryName: category?.strCategory ?? "",
                             imageUrl: category?.strCategoryThumb ?? "",
-                            onPressed: () => homeController.getCategoryListing(
-                                category?.strCategory ?? "Beef"),
+                            onPressed: () =>
+                                homeController.getCategoryListing(
+                                    category?.strCategory ?? "Beef"),
                           );
                         },
                       ),
@@ -80,24 +81,27 @@ class HomeView extends GetView<HomeController> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           return Obx(
-                            () => GridView.builder(
-                              gridDelegate:
+                                () =>
+                                GridView.builder(
+                                  gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       childAspectRatio: 1,
                                       crossAxisSpacing: 10,
                                       mainAxisSpacing: 10),
-                              itemBuilder: (BuildContext context, int index) {
-                                var meal = homeController
-                                    .categoryListing.value?.meals?[index];
-                                return MealWidget(
-                                    mealName: meal?.strMeal ?? "",
-                                    mealImage: meal?.strMealThumb ?? "");
-                              },
-                              itemCount: homeController
+                                  itemBuilder: (BuildContext context,
+                                      int index) {
+                                    var meal = homeController
+                                        .categoryListing.value?.meals?[index];
+                                    return MealWidget(
+                                        mealId:meal?.idMeal??"",
+                                        mealName: meal?.strMeal ?? "",
+                                        mealImage: meal?.strMealThumb ?? "");
+                                  },
+                                  itemCount: homeController
                                       .categoryListing.value?.meals?.length ??
-                                  0,
-                            ),
+                                      0,
+                                ),
                           );
                         },
                       ),
