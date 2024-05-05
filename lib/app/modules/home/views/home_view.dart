@@ -5,6 +5,7 @@ import 'package:foodie/app/modules/home/views/widgets/search_bar_widget.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -16,7 +17,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       body: SafeArea(
         child: Obx(() {
-          if (controller.isLoading.value) {
+          if (homeController.isLoading.value) {
             return const Center(
               child: CircularProgressIndicator(
                 strokeWidth: 2,
@@ -28,14 +29,16 @@ class HomeView extends GetView<HomeController> {
                 body: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(children: [
-                    const SearchBarWidget(
+                    SearchBarWidget(
+                      onSearch: (value) {},
                       hintText: "Search",
+                      enable: false,
+                      onPressed: () => Get.toNamed(Routes.SEARCH),
                     ),
                     const SizedBox(
                       height: 7,
                     ),
                     const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Explore Categories",
@@ -44,10 +47,6 @@ class HomeView extends GetView<HomeController> {
                               color: Colors.black,
                               fontSize: 15),
                         ),
-                        Text(
-                          "See All",
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                        )
                       ],
                     ),
                     const SizedBox(
@@ -58,16 +57,16 @@ class HomeView extends GetView<HomeController> {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount:
-                            controller.categories.value?.categories?.length ??
+                            homeController.categories.value?.categories?.length ??
                                 0,
                         itemBuilder: (BuildContext context, int index) {
                           var category =
-                              controller.categories.value?.categories?[index];
+                              homeController.categories.value?.categories?[index];
 
                           return CategoriesWidget(
                             categoryName: category?.strCategory ?? "",
                             imageUrl: category?.strCategoryThumb ?? "",
-                            onPressed: () => controller.getCategoryListing(
+                            onPressed: () => homeController.getCategoryListing(
                                 category?.strCategory ?? "Beef"),
                           );
                         },
@@ -89,13 +88,13 @@ class HomeView extends GetView<HomeController> {
                                       crossAxisSpacing: 10,
                                       mainAxisSpacing: 10),
                               itemBuilder: (BuildContext context, int index) {
-                                var meal = controller
+                                var meal = homeController
                                     .categoryListing.value?.meals?[index];
                                 return MealWidget(
                                     mealName: meal?.strMeal ?? "",
                                     mealImage: meal?.strMealThumb ?? "");
                               },
-                              itemCount: controller
+                              itemCount: homeController
                                       .categoryListing.value?.meals?.length ??
                                   0,
                             ),

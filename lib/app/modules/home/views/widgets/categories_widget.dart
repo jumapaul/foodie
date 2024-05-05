@@ -38,7 +38,9 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
           Text(
             widget.categoryName,
             style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 10),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 10),
           )
         ],
       ),

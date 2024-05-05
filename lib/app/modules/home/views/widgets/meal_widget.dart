@@ -41,10 +41,17 @@ class _MealWidgetState extends State<MealWidget> {
         Positioned(
           bottom: 10,
           left: 10,
-          child: Text(
-            widget.mealName,
-            style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white),
+          child: SizedBox(
+            width: 150,
+            child: Text(
+              widget.mealName,
+              maxLines: 1,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         )
       ],

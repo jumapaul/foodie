@@ -9,6 +9,7 @@ abstract class Routes {
   static const COUNTRIES = _Paths.COUNTRIES;
   static const PLANNER = _Paths.PLANNER;
   static const FAVORITE = _Paths.FAVORITE;
+  static const SEARCH = _Paths.SEARCH;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const COUNTRIES = '/countries';
   static const PLANNER = '/planner';
   static const FAVORITE = '/favorite';
+  static const SEARCH = '/search';
 }

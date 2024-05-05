@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../data/models/categories/categoriesResponse.dart';
 import '../../../data/models/categories/categoryListing.dart';
 import '../../../utils/constants/strings.dart';
@@ -25,7 +23,6 @@ class HomeController extends GetxController {
     }
   }
 
-
   getCategoryListing(String category) async {
     var response =
         await http.get(Uri.parse("$baseUrl$categoryListingEndpoint$category"));
@@ -33,14 +30,6 @@ class HomeController extends GetxController {
       categoryListing.value = categoryListingFromJson(response.body);
       isLoading.value = false;
     }
-  }
-
-  getSearchResults(String search) async{
-    var response = await http.get(Uri.parse("$baseUrl$searchEndPoint$search"));
-
-    // if(response.statusCode == 200){
-    //   categoryListing.value =
-    // }
   }
 
   @override

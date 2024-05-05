@@ -26,9 +26,10 @@ class MainPageView extends StatelessWidget {
           child: SizedBox(
             child: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white.withOpacity(0.7),
+              // backgroundColor: Colors.white.withOpacity(0.7),
               showUnselectedLabels: true,
               showSelectedLabels: true,
+              elevation: 1,
               onTap: pageController.changeTabIndex,
               currentIndex: pageController.tabIndex.value,
               unselectedItemColor: Colors.grey,
