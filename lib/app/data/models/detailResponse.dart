@@ -362,4 +362,98 @@ class Meals {
     return map;
   }
 
+  String? getIngredient(int index) {
+    switch (index) {
+      case 1:
+        return _strIngredient1;
+      case 2:
+        return _strIngredient2;
+      case 3:
+        return _strIngredient3;
+      case 4:
+        return _strIngredient4;
+      case 5:
+        return _strIngredient5;
+      case 6:
+        return _strIngredient6;
+      case 7:
+        return _strIngredient7;
+      case 8:
+        return _strIngredient8;
+      case 9:
+        return _strIngredient9;
+      case 10:
+        return _strIngredient10;
+      case 11:
+        return _strIngredient11;
+      case 12:
+        return _strIngredient12;
+      case 13:
+        return _strIngredient13;
+      case 14:
+        return _strIngredient14;
+      case 15:
+        return _strIngredient15;
+      case 16:
+        return _strIngredient16;
+      case 17:
+        return _strIngredient17;
+      case 18:
+        return _strIngredient18;
+      case 19:
+        return _strIngredient19;
+      case 20:
+        return _strIngredient20;
+      default:
+        return null;
+    }
+  }
+
+  String? getMeasure(int index) {
+    switch (index) {
+      case 1:
+        return _strMeasure1;
+      case 2:
+        return _strMeasure2;
+      case 3:
+        return _strMeasure3;
+      case 4:
+        return _strMeasure4;
+      case 5:
+        return _strMeasure5;
+      case 6:
+        return _strMeasure6;
+      case 7:
+        return _strMeasure7;
+      case 8:
+        return _strMeasure8;
+      case 9:
+        return _strMeasure9;
+      case 10:
+        return _strMeasure10;
+      case 11:
+        return _strMeasure11;
+      case 12:
+        return _strMeasure12;
+      case 13:
+        return _strMeasure13;
+      case 14:
+        return _strMeasure14;
+      case 15:
+        return _strMeasure15;
+      case 16:
+        return _strMeasure16;
+      case 17:
+        return _strMeasure17;
+      case 18:
+        return _strMeasure18;
+      case 19:
+        return _strMeasure19;
+      case 20:
+        return _strMeasure20;
+      default:
+        return null;
+    }
+  }
+
 }
