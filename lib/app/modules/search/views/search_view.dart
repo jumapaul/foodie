@@ -67,7 +67,7 @@ class SearchView extends GetView<SearchController> {
                   }
                 });
               }),
-            )
+            ),
           ],
         ),
       )),
