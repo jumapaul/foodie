@@ -1,11 +1,17 @@
 import 'dart:convert';
-CategoriesResponse categoriesResponseFromJson(String str) => CategoriesResponse.fromJson(json.decode(str));
-String categoriesResponseToJson(CategoriesResponse data) => json.encode(data.toJson());
+
+CategoriesResponse categoriesResponseFromJson(String str) =>
+    CategoriesResponse.fromJson(json.decode(str));
+
+String categoriesResponseToJson(CategoriesResponse data) =>
+    json.encode(data.toJson());
+
 class CategoriesResponse {
   CategoriesResponse({
-      List<Categories>? categories,}){
+    List<Categories>? categories,
+  }) {
     _categories = categories;
-}
+  }
 
   CategoriesResponse.fromJson(dynamic json) {
     if (json['categories'] != null) {
@@ -15,6 +21,7 @@ class CategoriesResponse {
       });
     }
   }
+
   List<Categories>? _categories;
 
   List<Categories>? get categories => _categories;
@@ -26,37 +33,44 @@ class CategoriesResponse {
     }
     return map;
   }
-
 }
 
-Categories categoriesFromJson(String str) => Categories.fromJson(json.decode(str));
+Categories categoriesFromJson(String str) =>
+    Categories.fromJson(json.decode(str));
+
 String categoriesToJson(Categories data) => json.encode(data.toJson());
+
 class Categories {
   Categories({
-      String? idCategory, 
-      String? strCategory, 
-      String? strCategoryThumb, 
-      String? strCategoryDescription,}){
+    String? idCategory,
+    String? strCategory,
+    String? strCategoryThumb,
+    String? strCategoryDescription,
+  }) {
     _idCategory = idCategory;
     _strCategory = strCategory;
     _strCategoryThumb = strCategoryThumb;
     _strCategoryDescription = strCategoryDescription;
-}
+  }
 
   Categories.fromJson(dynamic json) {
-    _idCategory = json['idCategory'];
+    _idCategory = json['idCategory'].toString();
     _strCategory = json['strCategory'];
     _strCategoryThumb = json['strCategoryThumb'];
     _strCategoryDescription = json['strCategoryDescription'];
   }
+
   String? _idCategory;
   String? _strCategory;
   String? _strCategoryThumb;
   String? _strCategoryDescription;
 
   String? get idCategory => _idCategory;
+
   String? get strCategory => _strCategory;
+
   String? get strCategoryThumb => _strCategoryThumb;
+
   String? get strCategoryDescription => _strCategoryDescription;
 
   Map<String, dynamic> toJson() {
@@ -67,5 +81,4 @@ class Categories {
     map['strCategoryDescription'] = _strCategoryDescription;
     return map;
   }
-
 }

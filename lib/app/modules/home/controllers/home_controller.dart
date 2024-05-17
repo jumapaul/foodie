@@ -1,26 +1,36 @@
-
+import 'package:foodie/app/modules/home/use_cases/home_use_case.dart';
+import 'package:foodie/app/services/database_helper.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:logging/logging.dart';
 import '../../../data/models/categories/categoriesResponse.dart';
 import '../../../data/models/categories/categoryListing.dart';
 import '../../../utils/constants/strings.dart';
 
+final Logger _logger = Logger('HomeController');
 class HomeController extends GetxController {
-  //
+
   var isLoading = false.obs;
 
   var categories = Rx<CategoriesResponse?>(null);
   var categoryListing = Rx<CategoryListing?>(null);
 
-  getCategories() async {
+  final HomeUseCase _homeUseCase = HomeUseCase();
+
+  Future<void> getCategoriesFromDatabase() async {
     isLoading.value = true;
-    var response = await http.get(Uri.parse("$baseUrl$categoryEndPoint"));
+    List<Categories>? categoriesFromDb =
+        await DatabaseHelper.getAllCategories();
 
-    if (response.statusCode == 200) {
-      categories.value = categoriesResponseFromJson(response.body);
+    _logger.info("------------>$categoriesFromDb");
 
-      isLoading.value = false;
+    if (categoriesFromDb != null) {
+      categories.value = CategoriesResponse(categories: categoriesFromDb);
+    } else {
+      categories.value = null;
     }
+
+    isLoading.value = false;
   }
 
   getCategoryListing(String category) async {
@@ -35,11 +45,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _homeUseCase.fetchAndSaveCategories();
   }
 
   @override
   void onReady() {
-    getCategories();
+    getCategoriesFromDatabase();
     getCategoryListing("Beef");
     super.onReady();
   }

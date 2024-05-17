@@ -25,23 +25,22 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onPressed,
-      child: Container(
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.black)),
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: TextFormField(
-            controller: widget.controller,
-            enabled: widget.enable,
-            onChanged: (value) => widget.onSearch(value),
-            decoration: InputDecoration(
-                hintText: widget.hintText,
-                border: InputBorder.none,
-                suffixIcon: GestureDetector(
-                  child: const Icon(Icons.search),
-                )),
+      child: Padding(
+        padding: const EdgeInsets.all(5),
+        child: TextFormField(
+          controller: widget.controller,
+          enabled: widget.enable,
+          onChanged: (value) => widget.onSearch(value),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(8),
+            hintText: widget.hintText,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Colors.grey.shade100)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: Colors.grey.shade100)),
+            prefixIcon: Icon(Icons.search),
           ),
         ),
       ),

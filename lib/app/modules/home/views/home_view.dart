@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/app/modules/home/views/widgets/categories_widget.dart';
 import 'package:foodie/app/modules/home/views/widgets/meal_widget.dart';
