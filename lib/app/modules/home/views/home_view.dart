@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodie/app/data/models/categories/categoriesResponse.dart';
+import 'package:foodie/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:foodie/app/modules/home/views/widgets/categories_widget.dart';
 import 'package:foodie/app/modules/home/views/widgets/meal_widget.dart';
 import 'package:foodie/app/modules/home/views/widgets/search_bar_widget.dart';
+import 'package:foodie/app/utils/resource/DataState.dart';
 
 import 'package:get/get.dart';
 
@@ -14,17 +17,15 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+
     final HomeController homeController = Get.put(HomeController());
+    final FavoriteController favoriteController = Get.put(FavoriteController());
     return Scaffold(
       body: SafeArea(
         child: Obx(() {
-          if (homeController.isLoading.value) {
-            return const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-              ),
-            );
-          } else {
+          final categories = homeController.categories.value;
+          if (categories is Success<CategoriesResponse>) {
+            var categoriesList = categories.data?.categories ?? [];
             return SafeArea(
               child: Scaffold(
                 body: Padding(
@@ -57,19 +58,16 @@ class HomeView extends GetView<HomeController> {
                       flex: 2,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount:
-                        homeController.categories.value?.categories?.length ??
-                            0,
+                        itemCount: categoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          var category =
-                          homeController.categories.value?.categories?[index];
+                          var category = categoriesList[index];
 
                           return CategoriesWidget(
-                            categoryName: category?.strCategory ?? "",
-                            imageUrl: category?.strCategoryThumb ?? "",
+                            categoryName: category.strCategory ?? "",
+                            imageUrl: category.strCategoryThumb ?? "",
                             onPressed: () =>
                                 homeController.getCategoryListing(
-                                    category?.strCategory ?? "Beef"),
+                                    category.strCategory ?? "Beef"),
                           );
                         },
                       ),
@@ -95,9 +93,12 @@ class HomeView extends GetView<HomeController> {
                                     var meal = homeController
                                         .categoryListing.value?.meals?[index];
                                     return MealWidget(
-                                        mealId:meal?.idMeal??"",
+                                        onPressed: (){
+                                        favoriteController.addFavoriteMealToDb(meal);
+                                        },
+                                        mealId: meal?.idMeal ?? "",
                                         mealName: meal?.strMeal ?? "",
-                                        mealImage: meal?.strMealThumb ?? "");
+                                        mealImage: meal?.strMealThumb ?? "",);
                                   },
                                   itemCount: homeController
                                       .categoryListing.value?.meals?.length ??
@@ -110,6 +111,14 @@ class HomeView extends GetView<HomeController> {
                   ]),
                 ),
               ),
+            );
+          } else if (categories is Error<CategoriesResponse>) {
+            return Center(
+              child: Text("Error: ${categories.error}"),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
           }
         }),

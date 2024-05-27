@@ -3,7 +3,7 @@ SearchResultsResponse searchResultsResponseFromJson(String str) => SearchResults
 String searchResultsResponseToJson(SearchResultsResponse data) => json.encode(data.toJson());
 class SearchResultsResponse {
   SearchResultsResponse({
-      List<Meals>? meals,}){
+      List<SearchMeals>? meals,}){
     _meals = meals;
 }
 
@@ -11,13 +11,13 @@ class SearchResultsResponse {
     if (json['meals'] != null) {
       _meals = [];
       json['meals'].forEach((v) {
-        _meals?.add(Meals.fromJson(v));
+        _meals?.add(SearchMeals.fromJson(v));
       });
     }
   }
-  List<Meals>? _meals;
+  List<SearchMeals>? _meals;
 
-  List<Meals>? get meals => _meals;
+  List<SearchMeals>? get meals => _meals;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -29,10 +29,10 @@ class SearchResultsResponse {
 
 }
 
-Meals mealsFromJson(String str) => Meals.fromJson(json.decode(str));
-String mealsToJson(Meals data) => json.encode(data.toJson());
-class Meals {
-  Meals({
+SearchMeals mealsFromJson(String str) => SearchMeals.fromJson(json.decode(str));
+String mealsToJson(SearchMeals data) => json.encode(data.toJson());
+class SearchMeals {
+  SearchMeals({
       String? idMeal, 
       String? strMeal, 
       dynamic strDrinkAlternate, 
@@ -141,7 +141,7 @@ class Meals {
     _dateModified = dateModified;
 }
 
-  Meals.fromJson(dynamic json) {
+  SearchMeals.fromJson(dynamic json) {
     _idMeal = json['idMeal'];
     _strMeal = json['strMeal'];
     _strDrinkAlternate = json['strDrinkAlternate'];
@@ -308,57 +308,7 @@ class Meals {
     final map = <String, dynamic>{};
     map['idMeal'] = _idMeal;
     map['strMeal'] = _strMeal;
-    map['strDrinkAlternate'] = _strDrinkAlternate;
-    map['strCategory'] = _strCategory;
-    map['strArea'] = _strArea;
-    map['strInstructions'] = _strInstructions;
     map['strMealThumb'] = _strMealThumb;
-    map['strTags'] = _strTags;
-    map['strYoutube'] = _strYoutube;
-    map['strIngredient1'] = _strIngredient1;
-    map['strIngredient2'] = _strIngredient2;
-    map['strIngredient3'] = _strIngredient3;
-    map['strIngredient4'] = _strIngredient4;
-    map['strIngredient5'] = _strIngredient5;
-    map['strIngredient6'] = _strIngredient6;
-    map['strIngredient7'] = _strIngredient7;
-    map['strIngredient8'] = _strIngredient8;
-    map['strIngredient9'] = _strIngredient9;
-    map['strIngredient10'] = _strIngredient10;
-    map['strIngredient11'] = _strIngredient11;
-    map['strIngredient12'] = _strIngredient12;
-    map['strIngredient13'] = _strIngredient13;
-    map['strIngredient14'] = _strIngredient14;
-    map['strIngredient15'] = _strIngredient15;
-    map['strIngredient16'] = _strIngredient16;
-    map['strIngredient17'] = _strIngredient17;
-    map['strIngredient18'] = _strIngredient18;
-    map['strIngredient19'] = _strIngredient19;
-    map['strIngredient20'] = _strIngredient20;
-    map['strMeasure1'] = _strMeasure1;
-    map['strMeasure2'] = _strMeasure2;
-    map['strMeasure3'] = _strMeasure3;
-    map['strMeasure4'] = _strMeasure4;
-    map['strMeasure5'] = _strMeasure5;
-    map['strMeasure6'] = _strMeasure6;
-    map['strMeasure7'] = _strMeasure7;
-    map['strMeasure8'] = _strMeasure8;
-    map['strMeasure9'] = _strMeasure9;
-    map['strMeasure10'] = _strMeasure10;
-    map['strMeasure11'] = _strMeasure11;
-    map['strMeasure12'] = _strMeasure12;
-    map['strMeasure13'] = _strMeasure13;
-    map['strMeasure14'] = _strMeasure14;
-    map['strMeasure15'] = _strMeasure15;
-    map['strMeasure16'] = _strMeasure16;
-    map['strMeasure17'] = _strMeasure17;
-    map['strMeasure18'] = _strMeasure18;
-    map['strMeasure19'] = _strMeasure19;
-    map['strMeasure20'] = _strMeasure20;
-    map['strSource'] = _strSource;
-    map['strImageSource'] = _strImageSource;
-    map['strCreativeCommonsConfirmed'] = _strCreativeCommonsConfirmed;
-    map['dateModified'] = _dateModified;
     return map;
   }
 

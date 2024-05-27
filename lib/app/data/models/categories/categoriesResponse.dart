@@ -8,7 +8,7 @@ String categoriesResponseToJson(CategoriesResponse data) =>
 
 class CategoriesResponse {
   CategoriesResponse({
-    List<Categories>? categories,
+    List<Categories>? categories, String? error,
   }) {
     _categories = categories;
   }

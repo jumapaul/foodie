@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/app/modules/detail/controllers/detail_controller.dart';
 import 'package:foodie/app/routes/app_pages.dart';
@@ -7,18 +8,21 @@ class MealWidget extends StatefulWidget {
   final String mealName;
   final String mealImage;
   final String mealId;
+  final VoidCallback onPressed;
 
   const MealWidget(
       {super.key,
       required this.mealName,
       required this.mealImage,
-      required this.mealId});
+      required this.mealId,
+      required this.onPressed});
 
   @override
   State<MealWidget> createState() => _MealWidgetState();
 }
 
 class _MealWidgetState extends State<MealWidget> {
+
   @override
   Widget build(BuildContext context) {
     final DetailController detailController = Get.put(DetailController());
@@ -43,12 +47,15 @@ class _MealWidgetState extends State<MealWidget> {
               color: Colors.black,
             ),
           ),
-          const Positioned(
-              top: 20,
-              right: 20,
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.orangeAccent,
+          Positioned(
+              top: 10,
+              right: 10,
+              child: GestureDetector(
+                onTap: widget.onPressed,
+                child: const Icon(
+                  Icons.favorite_border,
+                  color: Colors.orangeAccent,
+                ),
               )),
           Positioned(
             bottom: 10,

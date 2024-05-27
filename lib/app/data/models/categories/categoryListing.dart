@@ -44,7 +44,7 @@ class Meals {
   Meals.fromJson(dynamic json) {
     _strMeal = json['strMeal'];
     _strMealThumb = json['strMealThumb'];
-    _idMeal = json['idMeal'];
+    _idMeal = json['idMeal']?.toString();
   }
   String? _strMeal;
   String? _strMealThumb;
@@ -61,5 +61,4 @@ class Meals {
     map['idMeal'] = _idMeal;
     return map;
   }
-
 }

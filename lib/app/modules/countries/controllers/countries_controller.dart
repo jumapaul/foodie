@@ -1,10 +1,8 @@
+import 'package:foodie/app/data/models/categories/categoryListing.dart';
 import 'package:foodie/app/data/models/countries.dart';
 import 'package:foodie/app/utils/constants/strings.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
-import '../../../data/models/mealByAreaResponse.dart';
-
 
 class CountriesController extends GetxController {
 
@@ -120,14 +118,14 @@ class CountriesController extends GetxController {
   ].obs;
 
   var isLoading = false.obs;
-  var mealByArea = Rx<MealByAreaResponse?>(null);
+  var mealByArea = Rx<CategoryListing?>(null);
 
   getCountryMeal(String? countryName) async{
     isLoading.value = true;
     var response = await http.get(Uri.parse("$baseUrl$filterByAreaEndPoint$countryName"));
 
     if(response.statusCode == 200){
-      mealByArea.value = mealByAreaResponseFromJson(response.body);
+      mealByArea.value = categoryListingFromJson(response.body);
 
       isLoading.value = false;
     }

@@ -24,8 +24,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
         children: [
           Container(
             margin: const EdgeInsets.only(right: 5),
-            height: 100,
-            width: 100,
+            height: 80,
+            width: 80,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.grey.withOpacity(0.5)),

@@ -1,5 +1,4 @@
-import 'package:foodie/app/modules/home/use_cases/home_use_case.dart';
-import 'package:foodie/app/services/database_helper.dart';
+import 'package:foodie/app/utils/resource/DataState.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:logging/logging.dart';
@@ -7,30 +6,26 @@ import '../../../data/models/categories/categoriesResponse.dart';
 import '../../../data/models/categories/categoryListing.dart';
 import '../../../utils/constants/strings.dart';
 
-final Logger _logger = Logger('HomeController');
-class HomeController extends GetxController {
 
+class HomeController extends GetxController {
   var isLoading = false.obs;
 
-  var categories = Rx<CategoriesResponse?>(null);
+  var categories = Rx<DataState<CategoriesResponse>>(const Initial());
   var categoryListing = Rx<CategoryListing?>(null);
 
-  final HomeUseCase _homeUseCase = HomeUseCase();
+  getCategories() async {
+    try {
+      var response = await http.get(Uri.parse("$baseUrl$categoryEndPoint"));
 
-  Future<void> getCategoriesFromDatabase() async {
-    isLoading.value = true;
-    List<Categories>? categoriesFromDb =
-        await DatabaseHelper.getAllCategories();
-
-    _logger.info("------------>$categoriesFromDb");
-
-    if (categoriesFromDb != null) {
-      categories.value = CategoriesResponse(categories: categoriesFromDb);
-    } else {
-      categories.value = null;
+      if (response.statusCode == 200) {
+        var categoryResponse = categoriesResponseFromJson(response.body);
+        categories.value = Success(categoryResponse);
+      } else {
+        categories.value = const Error("Failed to load categories}");
+      }
+    } catch (e) {
+      categories.value = Error("Network error: $e");
     }
-
-    isLoading.value = false;
   }
 
   getCategoryListing(String category) async {
@@ -45,13 +40,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _homeUseCase.fetchAndSaveCategories();
   }
 
   @override
   void onReady() {
-    getCategoriesFromDatabase();
     getCategoryListing("Beef");
+    getCategories();
     super.onReady();
   }
 

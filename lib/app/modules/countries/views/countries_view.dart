@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodie/app/modules/countries/views/widgets/countries_widget.dart';
+import 'package:foodie/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:foodie/app/modules/home/views/widgets/meal_widget.dart';
-
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-
 import '../controllers/countries_controller.dart';
 
 class CountriesView extends GetView<CountriesController> {
@@ -16,6 +12,8 @@ class CountriesView extends GetView<CountriesController> {
   Widget build(BuildContext context) {
     final CountriesController countriesController =
         Get.put(CountriesController());
+
+    final FavoriteController favoriteController = Get.put(FavoriteController());
     return Scaffold(
       body: Obx(
         () {
@@ -111,6 +109,9 @@ class CountriesView extends GetView<CountriesController> {
                                   var areaMeal = countriesController
                                       .mealByArea.value?.meals?[index];
                                   return MealWidget(
+                                    onPressed: (){
+                                      favoriteController.addFavoriteMealToDb(areaMeal);
+                                    },
                                       mealName: areaMeal?.strMeal ?? "",
                                       mealImage: areaMeal?.strMealThumb ?? "",
                                       mealId: areaMeal?.idMeal ?? "");
