@@ -1,3 +1,4 @@
+import 'package:foodie/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:foodie/app/utils/resource/DataState.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +10,6 @@ import '../../../utils/constants/strings.dart';
 
 class HomeController extends GetxController {
   var isLoading = false.obs;
-
   var categories = Rx<DataState<CategoriesResponse>>(const Initial());
   var categoryListing = Rx<CategoryListing?>(null);
 

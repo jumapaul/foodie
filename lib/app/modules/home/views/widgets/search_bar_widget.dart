@@ -40,7 +40,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(color: Colors.grey.shade100)),
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: const Icon(Icons.search),
           ),
         ),
       ),

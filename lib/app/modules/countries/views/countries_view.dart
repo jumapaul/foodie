@@ -14,6 +14,8 @@ class CountriesView extends GetView<CountriesController> {
         Get.put(CountriesController());
 
     final FavoriteController favoriteController = Get.put(FavoriteController());
+
+    // bool isFavorite = false;
     return Scaffold(
       body: Obx(
         () {
@@ -108,13 +110,13 @@ class CountriesView extends GetView<CountriesController> {
                                 itemBuilder: (context, index) {
                                   var areaMeal = countriesController
                                       .mealByArea.value?.meals?[index];
+                                  favoriteController.isFavorites(areaMeal?.idMeal);
+
                                   return MealWidget(
-                                    onPressed: (){
-                                      favoriteController.addFavoriteMealToDb(areaMeal);
-                                    },
                                       mealName: areaMeal?.strMeal ?? "",
                                       mealImage: areaMeal?.strMealThumb ?? "",
-                                      mealId: areaMeal?.idMeal ?? "");
+                                      mealId: areaMeal?.idMeal ?? "",
+                                    isFavorite: favoriteController.isFavorite.value,);
                                 },
                                 itemCount: countriesController.mealByArea.value?.meals?.length,
                               );

@@ -57,10 +57,16 @@ class SearchView extends GetView<SearchController> {
                             var searchResults = searchViewController
                                 .searchResults.value?.meals?[index];
 
+                            var favoriteList = favoriteController
+                                .favoriteMeals.value.data?.meals;
+
+                            // var isFavorite = favoriteList?.contains(searchResults);
+
                             return MealWidget(
-                              onPressed: (){
-                                favoriteController.addSearchFavoriteMealToDb(searchResults);
-                              },
+                              isFavorite: false,
+                              // onPressed: (){
+                              //   favoriteController.addSearchFavoriteMealToDb(searchResults);
+                              // },
                               mealId: searchResults?.idMeal ?? "",
                               mealName: searchResults?.strMeal ?? "",
                               mealImage: searchResults?.strMealThumb ?? "",

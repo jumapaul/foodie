@@ -1,17 +1,28 @@
-import 'package:flutter/material.dart';
 import 'package:foodie/app/data/models/categories/categoryListing.dart';
 import 'package:foodie/app/data/models/categories/searchResultsResponse.dart';
 import 'package:foodie/app/services/favorite_database.dart';
 import 'package:foodie/app/utils/resource/DataState.dart';
 import 'package:get/get.dart';
-import 'package:logging/logging.dart';
-
-final Logger _logger = Logger("FavoriteController");
 
 class FavoriteController extends GetxController {
   var isLoading = false.obs;
   var isFavorite = false.obs;
-  var favoriteMeals = Rxn<DataState<CategoryListing>>(const Initial());
+
+  var favoriteMeals = Rx<DataState<CategoryListing>>(const Initial());
+
+  Future<void> getAllFavorites() async {
+    isLoading.value = true;
+    var favoriteMeal = await FavoriteDatabase.getAllMealsFromDb();
+    if (favoriteMeal != null) {
+      favoriteMeals.value = Success(CategoryListing(meals: favoriteMeal.meals));
+
+    } else {
+      favoriteMeals.value = const Error("There is no favorite yet");
+    }
+
+
+    isLoading.value = false;
+  }
 
   addSearchFavoriteMealToDb(SearchMeals? meal) async {
     await FavoriteDatabase.addSearchFavoriteMealsToDb(meal);
@@ -19,27 +30,20 @@ class FavoriteController extends GetxController {
 
   addFavoriteMealToDb(Meals? meal) async {
     await FavoriteDatabase.addMealsToDb(meal);
+    getAllFavorites();
   }
 
-  getAllFavorites() async {
-    print("Starting");
+  removeFavorite(String mealId) async{
+    await FavoriteDatabase.removeFavoriteFromDb(mealId);
+    getAllFavorites();
+  }
 
-    isLoading.value = true;
-    var favoriteMeal = await FavoriteDatabase.getAllMealsFromDb();
-    if (favoriteMeal != null) {
-      favoriteMeals.value = Success(CategoryListing(meals: favoriteMeal.meals));
-      print("Results");
-      print("favorite meals value =====>${favoriteMeals.value?.data?.meals?.length}");
+  Future<bool?> isFavorites(String? mealId) async{
+    var favorites = favoriteMeals.value.data?.meals;
 
-    } else {
-      favoriteMeals.value = const Error("There is no favorite yet");
-      print("No results");
+    isFavorite.value = favorites!.any((meal) => meal.idMeal == mealId);
 
-    }
-
-    print("Stop");
-
-    isLoading.value = false;
+    return isFavorite.value;
   }
 
   @override

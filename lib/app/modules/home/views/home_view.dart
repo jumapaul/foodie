@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodie/app/data/models/categories/categoriesResponse.dart';
 import 'package:foodie/app/modules/favorite/controllers/favorite_controller.dart';
@@ -9,6 +8,7 @@ import 'package:foodie/app/utils/resource/DataState.dart';
 
 import 'package:get/get.dart';
 
+import '../../../data/models/categories/categoryListing.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -17,9 +17,10 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-
-    final HomeController homeController = Get.put(HomeController());
     final FavoriteController favoriteController = Get.put(FavoriteController());
+    final HomeController homeController = Get.put(HomeController());
+    // bool isFavorite = false;
+
     return Scaffold(
       body: SafeArea(
         child: Obx(() {
@@ -65,9 +66,8 @@ class HomeView extends GetView<HomeController> {
                           return CategoriesWidget(
                             categoryName: category.strCategory ?? "",
                             imageUrl: category.strCategoryThumb ?? "",
-                            onPressed: () =>
-                                homeController.getCategoryListing(
-                                    category.strCategory ?? "Beef"),
+                            onPressed: () => homeController.getCategoryListing(
+                                category.strCategory ?? "Beef"),
                           );
                         },
                       ),
@@ -80,30 +80,34 @@ class HomeView extends GetView<HomeController> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           return Obx(
-                                () =>
-                                GridView.builder(
-                                  gridDelegate:
+                            () => GridView.builder(
+                              gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       childAspectRatio: 1,
                                       crossAxisSpacing: 10,
                                       mainAxisSpacing: 10),
-                                  itemBuilder: (BuildContext context,
-                                      int index) {
-                                    var meal = homeController
-                                        .categoryListing.value?.meals?[index];
-                                    return MealWidget(
-                                        onPressed: (){
-                                        favoriteController.addFavoriteMealToDb(meal);
-                                        },
-                                        mealId: meal?.idMeal ?? "",
-                                        mealName: meal?.strMeal ?? "",
-                                        mealImage: meal?.strMealThumb ?? "",);
-                                  },
-                                  itemCount: homeController
+                              itemBuilder: (BuildContext context, int index) {
+                                var meal = homeController
+                                    .categoryListing.value?.meals?[index];
+                                
+                                var favorite = homeController
+                                    .categoryListing.value?.meals
+                                    ?.any((m) => m.idMeal == meal?.idMeal);
+
+                                // var favoriteValue = favoriteController.isFavorites(meal);
+
+                                return MealWidget(
+                                  mealId: meal?.idMeal ?? "",
+                                  mealName: meal?.strMeal ?? "",
+                                  mealImage: meal?.strMealThumb ?? "",
+                                  isFavorite: favorite,
+                                );
+                              },
+                              itemCount: homeController
                                       .categoryListing.value?.meals?.length ??
-                                      0,
-                                ),
+                                  0,
+                            ),
                           );
                         },
                       ),

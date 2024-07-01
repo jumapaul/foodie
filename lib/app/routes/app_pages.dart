@@ -10,6 +10,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/main_page/bindings/main_page_binding.dart';
 import '../modules/main_page/views/main_page_view.dart';
+import '../modules/new_plan/bindings/new_plan_binding.dart';
+import '../modules/new_plan/views/new_plan_view.dart';
 import '../modules/planner/bindings/planner_binding.dart';
 import '../modules/planner/views/planner_view.dart';
 import '../modules/search/bindings/search_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.SEARCH,
       page: () => const SearchView(),
       binding: SearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_PLAN,
+      page: () => const NewPlanView(),
+      binding: NewPlanBinding(),
     ),
   ];
 }
