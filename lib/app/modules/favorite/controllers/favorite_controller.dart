@@ -34,14 +34,18 @@ class FavoriteController extends GetxController {
   }
 
   removeFavorite(String mealId) async{
-    await FavoriteDatabase.removeFavoriteFromDb(mealId);
+    // await FavoriteDatabase.removeFavoriteFromDb(mealId);
     getAllFavorites();
   }
 
   Future<bool?> isFavorites(String? mealId) async{
     var favorites = favoriteMeals.value.data?.meals;
 
-    isFavorite.value = favorites!.any((meal) => meal.idMeal == mealId);
+    if(favorites != null){
+      isFavorite.value = favorites.any((meal) => meal.idMeal == mealId);
+    }else{
+      print("----------Error occurred");
+    }
 
     return isFavorite.value;
   }

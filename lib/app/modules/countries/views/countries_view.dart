@@ -69,24 +69,26 @@ class CountriesView extends GetView<CountriesController> {
                             scrollDirection: Axis.horizontal,
                             itemCount: countriesController.countries.length,
                             itemBuilder: (context, index) {
-                              var country = countriesController.countries[index];
+                              var country =
+                                  countriesController.countries[index];
 
                               return GestureDetector(
                                   onTap: () {
                                     countriesController.tabIndex.value = index;
-                                    countriesController.getCountryMeal(country.name);
+                                    countriesController
+                                        .getCountryMeal(country.name);
                                   },
                                   child: CountriesNameWidget(
                                       countryName: country.name));
                             },
-                            separatorBuilder: (BuildContext context, int index) {
+                            separatorBuilder:
+                                (BuildContext context, int index) {
                               return const SizedBox(
                                 width: 5,
                               );
                             },
                           ),
                         ),
-
                         const SizedBox(
                           height: 10,
                         ),
@@ -110,15 +112,24 @@ class CountriesView extends GetView<CountriesController> {
                                 itemBuilder: (context, index) {
                                   var areaMeal = countriesController
                                       .mealByArea.value?.meals?[index];
-                                  favoriteController.isFavorites(areaMeal?.idMeal);
+
+                                  if (areaMeal != null) {
+                                    favoriteController
+                                        .isFavorites(areaMeal.idMeal);
+                                  }else{
+                                    print("------------>Meal is null");
+                                  }
 
                                   return MealWidget(
-                                      mealName: areaMeal?.strMeal ?? "",
-                                      mealImage: areaMeal?.strMealThumb ?? "",
-                                      mealId: areaMeal?.idMeal ?? "",
-                                    isFavorite: favoriteController.isFavorite.value,);
+                                    mealName: areaMeal?.strMeal ?? "",
+                                    mealImage: areaMeal?.strMealThumb ?? "",
+                                    mealId: areaMeal?.idMeal ?? "",
+                                    isFavorite:
+                                        favoriteController.isFavorite.value,
+                                  );
                                 },
-                                itemCount: countriesController.mealByArea.value?.meals?.length,
+                                itemCount: countriesController
+                                    .mealByArea.value?.meals?.length,
                               );
                             }
                           }),
