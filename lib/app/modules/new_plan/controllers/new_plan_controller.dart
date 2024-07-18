@@ -4,20 +4,23 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class NewPlanController extends GetxController {
-
   var selectedDay = "".obs;
-  var dropDownBottomState = false.obs;
+  var dialogState = true.obs;
 
-  void plannerSelectedDay(String day){
+
+  RxList<SearchMeals> addMeals = <SearchMeals>[].obs;
+
+  void removeMealFromList(SearchMeals meal){
+    addMeals.remove(meal);
+    update();
+  }
+
+  void plannerSelectedDay(String day) {
     selectedDay.value = day;
   }
 
-  addPlannerToDb(SearchMeals? meals, String? dayOfTheWeek) async{
-    await PlannerDatabase.addMealsToPlannerDb(meals, dayOfTheWeek);
-  }
-
-  void toggleDropDownButtonState(bool isOpen){
-    dropDownBottomState.value = isOpen;
+  addPlannerMealsToDb(List<SearchMeals>? addedMeals, String? dayOfTheWeek) async {
+    await PlannerDatabase.addMealListToPlannerDb(addedMeals, dayOfTheWeek);
   }
 
   @override

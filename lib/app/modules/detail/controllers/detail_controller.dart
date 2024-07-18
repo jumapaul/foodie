@@ -68,18 +68,6 @@ class DetailController extends GetxController {
     });
   }
 
-  // getRecipe() {
-  //   var mealInstruction = mealDetail.value?.meals?.first.strInstructions;
-  //   if (mealInstruction != null) {
-  //     var steps = mealInstruction.split(". ");
-  //
-  //     for(String steps in steps){
-  //       recipe.add(steps);
-  //     }
-  //     print("========>${recipe.length}");
-  //   }
-  // }
-
   @override
   void onInit() {
     super.onInit();

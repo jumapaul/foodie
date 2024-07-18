@@ -37,6 +37,6 @@ class FavoriteDatabase {
   static Future<int> removeFavoriteFromDb(String? mealId) async {
     final db = await CreateDatabase.getDB();
     return await db.delete(FavoriteMealsFields.favoriteTableName,
-        where: 'mealId = ${FavoriteMealsFields.mealId} = ?', whereArgs: [mealId]);
+        where: '${FavoriteMealsFields.mealId} = ?', whereArgs: [mealId]);
   }
 }

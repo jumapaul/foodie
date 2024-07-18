@@ -1,8 +1,6 @@
-import 'package:foodie/app/modules/favorite/controllers/favorite_controller.dart';
 import 'package:foodie/app/utils/resource/DataState.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:logging/logging.dart';
 import '../../../data/models/categories/categoriesResponse.dart';
 import '../../../data/models/categories/categoryListing.dart';
 import '../../../utils/constants/strings.dart';

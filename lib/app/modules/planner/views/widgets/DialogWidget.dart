@@ -60,7 +60,15 @@ class _DialogWidgetState extends State<DialogWidget> {
                       imageUrl: searchItem.strMealThumb ?? "",
                       mealName: searchItem.strMeal ?? "",
                       onPressed: (){
-                        newPlanController.addPlannerToDb(searchItem, widget.dayOfTheWeek);
+                        var existingMeals = newPlanController.addMeals.value;
+                        if(!existingMeals.any((meal) => meal.idMeal == searchItem.idMeal)){
+                          newPlanController.addMeals.add(searchItem);
+                        }
+                        newPlanController.dialogState.value = false;
+
+                        if(newPlanController.dialogState.isFalse){
+                          Get.back();
+                        }
                       },
                     );
                   }),
@@ -88,6 +96,7 @@ class DialogItem extends StatefulWidget {
 class _DialogItemState extends State<DialogItem> {
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         Container(
@@ -114,9 +123,7 @@ class _DialogItemState extends State<DialogItem> {
         // const Spacer(),
 
         GestureDetector(
-          onTap: () {
-            widget.onPressed;
-          },
+          onTap: widget.onPressed,
           child: const Icon(
             Icons.add_circle_outline,
             color: Colors.orangeAccent,

@@ -1,11 +1,17 @@
 import 'dart:convert';
-SearchResultsResponse searchResultsResponseFromJson(String str) => SearchResultsResponse.fromJson(json.decode(str));
-String searchResultsResponseToJson(SearchResultsResponse data) => json.encode(data.toJson());
+
+SearchResultsResponse searchResultsResponseFromJson(String str) =>
+    SearchResultsResponse.fromJson(json.decode(str));
+
+String searchResultsResponseToJson(SearchResultsResponse data) =>
+    json.encode(data.toJson());
+
 class SearchResultsResponse {
   SearchResultsResponse({
-      List<SearchMeals>? meals,}){
+    List<SearchMeals>? meals,
+  }) {
     _meals = meals;
-}
+  }
 
   SearchResultsResponse.fromJson(dynamic json) {
     if (json['meals'] != null) {
@@ -15,6 +21,7 @@ class SearchResultsResponse {
       });
     }
   }
+
   List<SearchMeals>? _meals;
 
   List<SearchMeals>? get meals => _meals;
@@ -26,66 +33,70 @@ class SearchResultsResponse {
     }
     return map;
   }
-
 }
 
 SearchMeals mealsFromJson(String str) => SearchMeals.fromJson(json.decode(str));
+
 String mealsToJson(SearchMeals data) => json.encode(data.toJson());
+
 class SearchMeals {
   SearchMeals({
-      String? idMeal, 
-      String? strMeal, 
-      dynamic strDrinkAlternate, 
-      String? strCategory, 
-      String? strArea, 
-      String? strInstructions, 
-      String? strMealThumb, 
-      String? strTags, 
-      String? strYoutube, 
-      String? strIngredient1, 
-      String? strIngredient2, 
-      String? strIngredient3, 
-      String? strIngredient4, 
-      String? strIngredient5, 
-      String? strIngredient6, 
-      String? strIngredient7, 
-      String? strIngredient8, 
-      String? strIngredient9, 
-      String? strIngredient10, 
-      String? strIngredient11, 
-      String? strIngredient12, 
-      String? strIngredient13, 
-      String? strIngredient14, 
-      String? strIngredient15, 
-      String? strIngredient16, 
-      String? strIngredient17, 
-      String? strIngredient18, 
-      String? strIngredient19, 
-      String? strIngredient20, 
-      String? strMeasure1, 
-      String? strMeasure2, 
-      String? strMeasure3, 
-      String? strMeasure4, 
-      String? strMeasure5, 
-      String? strMeasure6, 
-      String? strMeasure7, 
-      String? strMeasure8, 
-      String? strMeasure9, 
-      String? strMeasure10, 
-      String? strMeasure11, 
-      String? strMeasure12, 
-      String? strMeasure13, 
-      String? strMeasure14, 
-      String? strMeasure15, 
-      String? strMeasure16, 
-      String? strMeasure17, 
-      String? strMeasure18, 
-      String? strMeasure19, 
-      String? strMeasure20, 
-      String? strSource, 
-      dynamic strImageSource, 
-      dynamic strCreativeCommonsConfirmed, 
-      dynamic dateModified,}){
+    int? id,
+    String? idMeal,
+    String? strMeal,
+    dynamic strDrinkAlternate,
+    String? strCategory,
+    String? strArea,
+    String? strInstructions,
+    String? strMealThumb,
+    String? strTags,
+    String? strYoutube,
+    String? strIngredient1,
+    String? strIngredient2,
+    String? strIngredient3,
+    String? strIngredient4,
+    String? strIngredient5,
+    String? strIngredient6,
+    String? strIngredient7,
+    String? strIngredient8,
+    String? strIngredient9,
+    String? strIngredient10,
+    String? strIngredient11,
+    String? strIngredient12,
+    String? strIngredient13,
+    String? strIngredient14,
+    String? strIngredient15,
+    String? strIngredient16,
+    String? strIngredient17,
+    String? strIngredient18,
+    String? strIngredient19,
+    String? strIngredient20,
+    String? strMeasure1,
+    String? strMeasure2,
+    String? strMeasure3,
+    String? strMeasure4,
+    String? strMeasure5,
+    String? strMeasure6,
+    String? strMeasure7,
+    String? strMeasure8,
+    String? strMeasure9,
+    String? strMeasure10,
+    String? strMeasure11,
+    String? strMeasure12,
+    String? strMeasure13,
+    String? strMeasure14,
+    String? strMeasure15,
+    String? strMeasure16,
+    String? strMeasure17,
+    String? strMeasure18,
+    String? strMeasure19,
+    String? strMeasure20,
+    String? strSource,
+    dynamic strImageSource,
+    dynamic strCreativeCommonsConfirmed,
+    dynamic dateModified,
+  }) {
+    _id = id;
     _idMeal = idMeal;
     _strMeal = strMeal;
     _strDrinkAlternate = strDrinkAlternate;
@@ -139,9 +150,10 @@ class SearchMeals {
     _strImageSource = strImageSource;
     _strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
     _dateModified = dateModified;
-}
+  }
 
   SearchMeals.fromJson(dynamic json) {
+    _id = json['id'];
     _idMeal = json['idMeal'];
     _strMeal = json['strMeal'];
     _strDrinkAlternate = json['strDrinkAlternate'];
@@ -196,6 +208,8 @@ class SearchMeals {
     _strCreativeCommonsConfirmed = json['strCreativeCommonsConfirmed'];
     _dateModified = json['dateModified'];
   }
+
+  int? _id;
   String? _idMeal;
   String? _strMeal;
   dynamic _strDrinkAlternate;
@@ -250,66 +264,120 @@ class SearchMeals {
   dynamic _strCreativeCommonsConfirmed;
   dynamic _dateModified;
 
+  int? get id => _id;
+
   String? get idMeal => _idMeal;
+
   String? get strMeal => _strMeal;
+
   dynamic get strDrinkAlternate => _strDrinkAlternate;
+
   String? get strCategory => _strCategory;
+
   String? get strArea => _strArea;
+
   String? get strInstructions => _strInstructions;
+
   String? get strMealThumb => _strMealThumb;
+
   String? get strTags => _strTags;
+
   String? get strYoutube => _strYoutube;
+
   String? get strIngredient1 => _strIngredient1;
+
   String? get strIngredient2 => _strIngredient2;
+
   String? get strIngredient3 => _strIngredient3;
+
   String? get strIngredient4 => _strIngredient4;
+
   String? get strIngredient5 => _strIngredient5;
+
   String? get strIngredient6 => _strIngredient6;
+
   String? get strIngredient7 => _strIngredient7;
+
   String? get strIngredient8 => _strIngredient8;
+
   String? get strIngredient9 => _strIngredient9;
+
   String? get strIngredient10 => _strIngredient10;
+
   String? get strIngredient11 => _strIngredient11;
+
   String? get strIngredient12 => _strIngredient12;
+
   String? get strIngredient13 => _strIngredient13;
+
   String? get strIngredient14 => _strIngredient14;
+
   String? get strIngredient15 => _strIngredient15;
+
   String? get strIngredient16 => _strIngredient16;
+
   String? get strIngredient17 => _strIngredient17;
+
   String? get strIngredient18 => _strIngredient18;
+
   String? get strIngredient19 => _strIngredient19;
+
   String? get strIngredient20 => _strIngredient20;
+
   String? get strMeasure1 => _strMeasure1;
+
   String? get strMeasure2 => _strMeasure2;
+
   String? get strMeasure3 => _strMeasure3;
+
   String? get strMeasure4 => _strMeasure4;
+
   String? get strMeasure5 => _strMeasure5;
+
   String? get strMeasure6 => _strMeasure6;
+
   String? get strMeasure7 => _strMeasure7;
+
   String? get strMeasure8 => _strMeasure8;
+
   String? get strMeasure9 => _strMeasure9;
+
   String? get strMeasure10 => _strMeasure10;
+
   String? get strMeasure11 => _strMeasure11;
+
   String? get strMeasure12 => _strMeasure12;
+
   String? get strMeasure13 => _strMeasure13;
+
   String? get strMeasure14 => _strMeasure14;
+
   String? get strMeasure15 => _strMeasure15;
+
   String? get strMeasure16 => _strMeasure16;
+
   String? get strMeasure17 => _strMeasure17;
+
   String? get strMeasure18 => _strMeasure18;
+
   String? get strMeasure19 => _strMeasure19;
+
   String? get strMeasure20 => _strMeasure20;
+
   String? get strSource => _strSource;
+
   dynamic get strImageSource => _strImageSource;
+
   dynamic get strCreativeCommonsConfirmed => _strCreativeCommonsConfirmed;
+
   dynamic get dateModified => _dateModified;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = _id;
     map['idMeal'] = _idMeal;
     map['strMeal'] = _strMeal;
     map['strMealThumb'] = _strMealThumb;
     return map;
   }
-
 }

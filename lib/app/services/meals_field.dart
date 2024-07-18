@@ -7,9 +7,10 @@ class FavoriteMealsFields {
 }
 
 class PlannerFields{
-  static const String plannerTableName = 'favorites';
+  static const String plannerTableName = 'planner';
+  static const String id = "id";
   static const String mealId = "idMeal";
   static const String mealName = "strMeal";
   static const String mealThumb = "strMealThumb";
-  static const idType = 'TEXT PRIMARY KEY';
+  static const String dayPlan = "strDayOfTheWeek";
 }

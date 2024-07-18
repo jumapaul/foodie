@@ -18,7 +18,7 @@ class MealWidget extends StatefulWidget {
       required this.mealName,
       required this.mealImage,
       required this.mealId,
-      required this.isFavorite});
+      this.isFavorite});
 
   @override
   State<MealWidget> createState() => _MealWidgetState();
