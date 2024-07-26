@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodie/app/data/models/categories/searchResultsResponse.dart';
 import 'package:foodie/app/modules/new_plan/views/widgets/planner_meals_widget.dart';
 import 'package:foodie/app/modules/planner/views/widgets/DaysWidget.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,7 @@ class PlannerView extends GetView<PlannerController> {
                   builder: (context, constraints) {
                     return Obx(() {
                       var mealsOfTheDay = plannerController.mealsOfTheDay.value;
-
+                      
                       if (mealsOfTheDay.data?.meals != null) {
                         return GridView.builder(
                           gridDelegate:

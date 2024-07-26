@@ -10,7 +10,6 @@ class MealWidget extends StatefulWidget {
   final String mealName;
   final String mealImage;
   final String mealId;
-  final bool? isFavorite;
 
 
   const MealWidget(
@@ -18,42 +17,15 @@ class MealWidget extends StatefulWidget {
       required this.mealName,
       required this.mealImage,
       required this.mealId,
-      this.isFavorite});
+      });
 
   @override
   State<MealWidget> createState() => _MealWidgetState();
 }
 
 class _MealWidgetState extends State<MealWidget> {
-  late bool isFavorite;
 
   final FavoriteController favoriteController = Get.put(FavoriteController());
-
-  @override
-  void initState(){
-    super.initState();
-    isFavorite = widget.isFavorite!;
-    // checkFavoriteStatus();
-  }
-
-  // Future<void> checkFavoriteStatus() async{
-  //   isFavorite = (await favoriteController.isFavorites(widget.mealId))!;
-  //
-  //   setState(() {});
-  // }
-
-  void toggleFavorite(){
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-    final FavoriteController favoriteController = Get.find<FavoriteController>();
-
-    if(isFavorite){
-      favoriteController.addFavoriteMealToDb(Meals(idMeal: widget.mealId, strMeal: widget.mealName, strMealThumb: widget.mealImage));
-    }else{
-      favoriteController.removeFavorite(widget.mealId);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +55,11 @@ class _MealWidgetState extends State<MealWidget> {
               top: 10,
               right: 10,
               child: GestureDetector(
-                onTap: toggleFavorite,
-                child: Icon(
-                  isFavorite ? Icons.favorite: Icons.favorite_border,
+                onTap: (){
+                  //Todo
+                },
+                child: const Icon(
+                  Icons.favorite_border,
                   color: Colors.orangeAccent,
                 ),
               )),

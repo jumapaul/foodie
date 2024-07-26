@@ -63,7 +63,7 @@ class SearchView extends GetView<SearchController> {
                             // var isFavorite = favoriteList?.contains(searchResults);
 
                             return MealWidget(
-                              isFavorite: false,
+                              // isFavorite: false,
                               // onPressed: (){
                               //   favoriteController.addSearchFavoriteMealToDb(searchResults);
                               // },

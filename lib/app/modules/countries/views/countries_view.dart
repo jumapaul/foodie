@@ -12,10 +12,6 @@ class CountriesView extends GetView<CountriesController> {
   Widget build(BuildContext context) {
     final CountriesController countriesController =
         Get.put(CountriesController());
-
-    final FavoriteController favoriteController = Get.put(FavoriteController());
-
-    // bool isFavorite = false;
     return Scaffold(
       body: Obx(
         () {
@@ -113,19 +109,10 @@ class CountriesView extends GetView<CountriesController> {
                                   var areaMeal = countriesController
                                       .mealByArea.value?.meals?[index];
 
-                                  if (areaMeal != null) {
-                                    favoriteController
-                                        .isFavorites(areaMeal.idMeal);
-                                  }else{
-                                    print("------------>Meal is null");
-                                  }
-
                                   return MealWidget(
                                     mealName: areaMeal?.strMeal ?? "",
                                     mealImage: areaMeal?.strMealThumb ?? "",
                                     mealId: areaMeal?.idMeal ?? "",
-                                    isFavorite:
-                                        favoriteController.isFavorite.value,
                                   );
                                 },
                                 itemCount: countriesController

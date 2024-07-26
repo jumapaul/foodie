@@ -17,9 +17,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final FavoriteController favoriteController = Get.put(FavoriteController());
     final HomeController homeController = Get.put(HomeController());
-    // bool isFavorite = false;
 
     return Scaffold(
       body: SafeArea(
@@ -90,18 +88,12 @@ class HomeView extends GetView<HomeController> {
                               itemBuilder: (BuildContext context, int index) {
                                 var meal = homeController
                                     .categoryListing.value?.meals?[index];
-                                
-                                var favorite = homeController
-                                    .categoryListing.value?.meals
-                                    ?.any((m) => m.idMeal == meal?.idMeal);
 
-                                // var favoriteValue = favoriteController.isFavorites(meal);
 
                                 return MealWidget(
                                   mealId: meal?.idMeal ?? "",
                                   mealName: meal?.strMeal ?? "",
                                   mealImage: meal?.strMealThumb ?? "",
-                                  isFavorite: favorite,
                                 );
                               },
                               itemCount: homeController
